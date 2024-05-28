@@ -1,0 +1,63 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+<section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+
+
+          <!-- /.box -->
+
+          <div class="box">
+            <div class="box-header">
+              <h3>FACILITY TABLE</h3>
+              <h6 class="box-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+				<h4><center>TO INSERT CLICK<br><u><b><a href="/owner/facility_insert/" class="a">Insert Data</a></b></u></center></h4>
+              <table id="example" class="table table-bordered table-hover display nowrap margin-top-10">
+				<thead>
+
+					<tr>
+						<th>ID</th>
+						<th>FACILITY NAME</th>
+						<th>FACILITY DESCRIPTION</th>
+						<th><span class="fa fa-trash"></span></th>
+						<th><span class="fa fa-edit"></span></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for i in facility_table %}
+					<tr>
+
+						<td>{{i.f_id}}</td>
+						<td>{{i.f_name}}</td>
+						<td>{{i.f_desc}}</td>
+						<td><a href="/owner/facility_delete/{{i.f_id}}"><span class="fa fa-trash"></span></a></td>
+						<td><a href="/owner/facility_update/{{i.f_id}}"><span class="fa fa-edit"></span></a></td>
+
+					</tr>
+					{% endfor %}
+
+				</tbody>
+
+
+			</table>
+
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+{% endblock %}
+
+
+	<script src=" {% static 'js/pages/data-table.js' %}"></script>
+

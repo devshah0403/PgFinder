@@ -1,0 +1,10 @@
+{% load static %}
+{% load cart_tag %}
+{% for c in cat %}
+
+  <div class="menu-colum">
+	   <ul>
+		   <li value="{{c.area_id}}"><a href="/client/loc/{{c.area_id}}">{{c.area_name}}</a></li>
+	   </ul>
+  </div>
+{% endfor %}

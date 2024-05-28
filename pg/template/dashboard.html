@@ -1,0 +1,237 @@
+﻿{% extends 'data.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon push-bottom bg-blue"><i class="ion ion-ios-pricetag-outline"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text"><br/></span>
+                    <span class="info-box-number">{{user}}</span>
+
+
+                    <span class="progress-description">
+                    TOTAL USERS
+                  </span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon push-bottom bg-success"><i class="ion ion-ios-eye-outline"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text"><br/></span>
+                    <span class="info-box-number">{{pg}}</span>
+
+
+                    <span class="progress-description">
+                    TOTAL PG
+                  </span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon push-bottom bg-purple"><i
+                        class="ion ion-ios-cloud-download-outline"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text"><br/></span>
+                    <span class="info-box-number">{{owner}}</span>
+
+
+                    <span class="progress-description">
+                    TOTAL OWNER
+                  </span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon push-bottom bg-danger"><i class="ion-ios-chatbubble-outline"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text"><br/></span>
+                    <span class="info-box-number">{{book}}</span>
+
+                    <span class="progress-description">
+                    TOTAL BOOKING
+                  </span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 connectedSortable">
+            <!-- solid sales graph -->
+            <div class="box box-solid bg-teal-gradient">
+                <div class="box-header">
+                    <i class="fa fa-th"></i>
+
+                    <h3 class="box-title">Sales Graph</h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn bg-teal btn-sm" data-widget="collapse"><i
+                                class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn bg-teal btn-sm" data-widget="remove"><i
+                                class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- chart.html -->
+
+                {% include 'base.html' %}
+
+                <script>
+    {% block jquery %}
+
+    var endpoint = '/api/chart/data/'
+    var defaultData = []
+    var labels = [];
+    $.ajax({
+        method: "GET",
+        url: endpoint,
+        success: function(data) {
+            labels = data.labels
+            defaultData = data.default
+            setChart()
+        },
+        error: function(error_data) {
+            console.log("error")
+            console.log(error_data)
+        }
+    })
+
+    function setChart() {
+       var ctx = document.getElementById("myChart");
+        var ctx2 = document.getElementById("myChart2");
+        var myChart = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels:labels,
+                datasets: [{
+                    label: 'Profit',
+                    data: defaultData,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+        var myChart = new Chart(ctx, {
+            type: 'polarArea',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: '# value',
+                    data: defaultData,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    }
+    // var ctx = document.getElementById("myChart");
+
+
+
+    {% endblock %}
+
+                </script>
+
+
+
+
+
+                <!--
+                <div class="box-body border-radius-none">
+                  <div class="chart" id="line-chart" style="height: 220px;"></div>
+                </div>  -->
+
+
+
+            </div>
+            <!-- /.box -->
+        </div>
+
+
+    </div>
+
+
+
+    <!-- /.row (main row) -->
+
+</section>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+{% endblock %}

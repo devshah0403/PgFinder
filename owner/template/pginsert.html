@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+
+{% load static %}
+{% block content %}
+
+
+<body>
+<form method="POST" action="/owner/pg_insert/">
+  {% csrf_token %}
+    <center>
+  <section class="content">
+
+     <!-- Basic Forms -->
+      <div class="box box-default">
+        <div class="box-header with-border">
+			<center><h3 align="left"><b>INSERT PG</b></h3></center>
+
+
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="row">
+            <div class="col-md-12">
+
+				<div class="form-group clearfix">
+				  <label for="example-text1-input" class="col-sm-2 col-form-label">NAME</label>
+				  <div class="col-sm-10">
+					<input class="form-control" type="text" id="example-text2-input" name="pg_name">
+				  </div>
+				</div>
+				<div class="form-group clearfix">
+				  <label for="example-text1-input" class="col-sm-2 col-form-label">E-MAIL</label>
+				  <div class="col-sm-10">
+					<input class="form-control" type="email" id="example-text1-input" name="pg_email">
+				  </div>
+				</div>
+				<div class="form-group clearfix">
+				  <label for="example-email-input" class="col-sm-2 col-form-label">CONTACT</label>
+				  <div class="col-sm-10">
+					<input class="form-control" type="number" id="example-email-input" name="pg_con">
+				  </div>
+				</div>
+				<div class="form-group clearfix">
+				  <label for="example-url-input" class="col-sm-2 col-form-label">ADDRESS</label>
+				  <div class="col-sm-10">
+					<input class="form-control" type="text" id="example-url-input" name="pg_add">
+				  </div>
+				</div>
+				<div class="form-group clearfix">
+				  <label for="example-tel-input" class="col-sm-2 col-form-label">IMAGE</label>
+				  <div class="col-sm-10">
+					<input class="form-control" type="text" id="example-tel-input" name="pg_img">
+				  </div>
+				</div>
+				<div class="form-group clearfix">
+				  <label for="example-text1-input" class="col-sm-2 col-form-label">DESCRIPTION</label>
+				  <div class="col-sm-10">
+					<input class="form-control" type="text" id="example-text3-input" name="pg_desc">
+				  </div>
+				</div>
+				<div class="form-group clearfix">
+				  <label for="example-password-input" class="col-sm-2 col-form-label">AVAILABILITY</label>
+				  <div class="col-sm-10">
+					<input class="form-control" type="number" id="example-password-input" name="pg_avail">
+				  </div>
+				</div>
+				<div class="form-group clearfix">
+				  <label for="example-number-input" class="col-sm-2 col-form-label">PRICE</label>
+				  <div class="col-sm-10">
+					<input class="form-control" type="number" id="example-number-input" name="pg_price">
+				  </div>
+				</div>
+				<div class="form-group clearfix">
+				  <label for="example-number1-input" class="col-sm-2 col-form-label">CATEGORY ID</label>
+				  <div class="col-sm-10">
+					<input class="form-control" type="number" id="example-number1-input" name="c_id_id">
+				  </div>
+				</div>
+				<div class="form-group clearfix">
+				  <label for="example-number1-input" class="col-sm-2 col-form-label">AREA ID</label>
+				  <div class="col-sm-10">
+					<input class="form-control" type="text" id="example-number2-input" name="area_id_id">
+				  </div>
+				</div>
+				<div class="form-group clearfix">
+				  <label for="example-datetime-local-input" class="col-sm-2 col-form-label">OWNER ID</label>
+				  <div class="col-sm-10">
+					<input class="form-control" type="number" id="example-datetime-local-input" name="o_id_id">
+				  </div>
+				</div>
+				<div class="box-footer" align="center">
+                <input type="submit" class="btn btn-primary"></input>
+              </div>
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+
+
+      <!-- /.row -->
+
+    </section>
+    <!-- /.content -->
+        </center>
+</form>
+</body>
+
+
+{% endblock %}
+
+

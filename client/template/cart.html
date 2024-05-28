@@ -1,0 +1,119 @@
+<!doctype html>
+{% extends 'header1.html' %}
+{% load static %}
+{% load mathfilters %}
+{% load cart_tag %}
+{% block content %}
+
+    <!-- BREADCRUMB AREA START -->
+        <!-- BREADCRUMB AREA END -->
+
+    <!-- SHOPING CART AREA START -->
+    <div class="liton__shoping-cart-area mb-120">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shoping-cart-inner">
+                        <div class="ltn__myaccount-tab-content-inner" align="left">
+                                               <p class="title-2">Your Bookings</p>
+                        </div>
+                        <div class="shoping-cart-table table-responsive" align="center">
+
+                            <table>
+                                {% if count != 0 %}
+                                <thead align="center">
+                                    <th class="cart-product-info">Booking Date</th>
+                                    <th class="cart-product-image">Image</th>
+                                    <th class="cart-product-info">Product</th>
+                                    <th class="cart-product-price">Price</th>
+                                    <th class="cart-product-price">Status</th>
+                                    <th class="cart-product-price">Pay Status</th>
+                                    <th class="cart-product-info">Payment Type</th>
+                                </thead>
+                                    {% else %}
+                                    <b>No PG Bookings Done</b>
+                                {% endif %}
+
+
+
+                                <tbody>
+                                {% for i in form %}
+                                    <tr align="center">
+
+                                         <td class="cart-product-subtotal">{{i.b_date}}</td>
+                                        <td class="cart-product-image">
+                                            <a href="/client/product-details/{{i.pg_id_id}}"><img src="{% static '/images/' %}{{i.pg_id.pg_img}}" alt="#"></a>
+                                        </td>
+                                        <td class="cart-product-info">
+                                            <h4><a href="/client/product-details/{{i.pg_id_id}}">{{i.pg_id.pg_name}}</a></h4>
+                                        </td>
+                                        <td class="cart-product-price"><h6>{{i.pg_id.pg_price}}₹</h6></td>
+                                        {% if i.b_status == 1 %}
+                                        <td><button disabled="true" class="bg-green">ACCEPTED</button></td>
+                                        {% elif i.b_status == 2 %}
+                                        <td><button disabled="true" class="bg-red">REJECTED</button></td>
+                                        {% else %}
+                                        <td><button disabled="true" class="bg-orange">PENDING</button></td>
+
+                                        {% endif %}
+                                        {% if i.pay_status == 0 %}
+                                        <td><button disabled="true" class="bg-orange">PENDING</button></td>
+                                       {% elif i.pay_status == 1 %}
+                                        <td><button disabled="true" class="bg-green">RECEIVED</button></td>
+                                        {% else %}
+                                        <td class="cart-product-info"><h6>--</h6></td>
+                                        {% endif %}
+
+                                            {% if i.b_status != 0 %}
+                                             {% if i.pay_status == 1 and i.pay_type == 1 %}
+                                            <td><button disabled="true" class="bg-green">PAID WITH RAZORPAY</button></td>
+                                            {% else %}
+                                            {% if i.pay_type == 0 %}
+                                            <td><button disabled="true" class="bg-green">CASH</button></td>
+                                            {% elif i.pay_type == 2 %}
+                                            <td class="cart-product-info"><h6>--</h6></td>
+                                            {% elif i.pay_type == 1 %}
+                                            <td class="cart-product-info">
+                                                 <form class="text-center border border-light p-5" action="/client/cart/" method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="name" id="name" required class="form-control mb-4"
+                                            placeholder="Name">
+                                            <input type="hidden" name="bid" value="{{i.b_id}}">
+                                    <!-- RAZORPAY INTEGRATION HERE -->
+
+                                    <script src="https://checkout.razorpay.com/v1/checkout.js"
+                                            data-key="rzp_test_cNXEqnlx16Gdi9"
+                                            data-amount="{{i.pg_id.pg_price|multiply:100}}"
+                                            data-currency="INR"
+                                            data-order_id="{{payment.id}}"
+                                            data-buttontext="Pay with Razorpay"
+                                            data-name="PG-Finder"
+                                             data-url_root= "https://eneqd3r9zrjok.x.pipedream.net/"
+                                            data-description="Best Place to find PG's."
+                                            data-image="{% static 'img/title.png' %}"
+                                            data-prefill.name="Rajal Kadia"
+                                            data-prefill.email="thepvrzone@gmail.com"
+                                            data-theme.color="#F37254">
+
+                                    </script>
+                                             </form>
+                                        </td>
+                                        {% endif %}
+                                        {% endif %}
+                                        {% endif %}
+
+                                    </tr>
+                                    {% endfor %}
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- SHOPING CART AREA END -->
+
+{% endblock %}

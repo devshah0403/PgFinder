@@ -1,0 +1,116 @@
+{% extends 'data.html' %}
+{% load static %}
+{% block content %}
+
+<section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+
+
+          <!-- /.box -->
+
+          <div class="box">
+            <div class="box-header">
+              <h3>REPORT-2</h3>
+                <br>
+                <form action="/report2/" method="post">
+                    {% csrf_token %}
+                <label>
+                    From:
+                <input type="date" class="" placeholder="" name="start">
+                </label>
+
+                <label>
+                    To:
+
+                <input type="date" class="" placeholder="" name="end">
+                 </label>
+                <input type="submit">
+                </form>
+            </div>
+
+            <!-- /.box-header -->
+            <div class="box-body">
+
+              <table id="example" class="table table-bordered table-hover display nowrap margin-top-10">
+				<thead>
+
+					<tr>
+						<th>ID</th>
+						<th>USER ID</th>
+						<th>PG ID</th>
+						<th>AMOUNT</th>
+						<th>CHECK-IN DATE</th>
+						<th>CHECK-OUT DATE</th>
+						<th>BOOKING DATE</th>
+                        <th>PAY STATUS</th>
+                        <th>BOOKING STATUS</th>
+
+
+					</tr>
+				</thead>
+				<tbody>
+					{% for i in form %}
+					<tr>
+
+						<td>{{i.b_id}}</td>
+						<td>{{i.user_id_id}}-{{i.user_id.user_fname}} {{i.user_id.user_lname}}</td>
+						<td>{{i.pg_id_id}}-{{i.pg_id.pg_name}}</td>
+						<td>{{i.b_amt}}</td>
+						<td>{{i.checkin_date}}</td>
+						<td>{{i.checkout_date}}</td>
+						<td>{{i.b_date}}</td>
+                        {% if i.pay_status == 1 %}
+						<td><span class="label label-success">Accepted</span></td>
+						{% elif i.pay_status == 2 %}
+						<td><span class="label label-danger">Rejected</span></td>
+						{% else %}
+						<td><span class="label label-warning">Pending</span></td>
+						{% endif %}
+
+                        {% if i.b_status == 1 %}
+						<td><span class="label label-success">Accepted</span></td>
+						{% elif i.b_status == 2 %}
+						<td><span class="label label-danger">Rejected</span></td>
+						{% else %}
+						<td><span class="label label-warning">Pending</span></td>
+						{% endif %}
+
+
+					</tr>
+					{% endfor %}
+
+				</tbody>
+
+
+			</table>
+
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+{% endblock %}
+<!--
+<div class="box-header">
+              <h3>REPORT-2</h3>
+                <br>
+                <label>
+                    From:
+                <input type="date" class="" placeholder="" name="start">
+                </label>
+
+                <label>
+                    To:
+
+                <input type="date" class="" placeholder="" name="end">
+                 </label>
+                <input type="submit">
+
+            </div>
+-->

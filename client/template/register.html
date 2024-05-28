@@ -1,0 +1,52 @@
+<!doctype html>
+{% extends 'header1.html' %}
+{% load static %}
+{% block content %}
+
+
+
+    <!-- LOGIN AREA START (Register) -->
+    <div class="ltn__login-area pb-110">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title-area text-center">
+                        <br><br><br>
+                        <h1 class="section-title">Register <br>Your Account</h1>
+                        <p>Register to find best facilites in particular area.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="account-login-inner">
+                        <form action="/client/insert/" method="post" class="ltn__form-box contact-form-box">
+                            {% csrf_token %}
+                            <input type="text" name="user_fname" placeholder="First Name" required autofocus>
+                            <input type="text" name="user_lname" placeholder="Last Name">
+                            <input type="email" name="user_email" placeholder="Email">
+                            <input type="password" name="user_pass" placeholder="Password">
+                            <input type="text" name="user_add" placeholder="Address">
+                            <center>
+                             <input type="text" name="user_con" placeholder="Contact">
+
+                            <div class="btn-wrapper">
+                                <button class="theme-btn-1 btn reverse-color btn-block" type="submit">CREATE ACCOUNT</button>
+                            </div>
+                            </center>
+                        </form>
+                        <div class="by-agree text-center">
+                            <p>By creating an account, you agree to our:</p>
+                            <p><a href="#">TERMS OF CONDITIONS  &nbsp; &nbsp; | &nbsp; &nbsp;  PRIVACY POLICY</a></p>
+                            <div class="go-to-btn mt-50">
+                                <a href="/client/userlogin/">ALREADY HAVE AN ACCOUNT ?</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- LOGIN AREA END -->
+
+{% endblock %}

@@ -1,0 +1,86 @@
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.7.0/parsley.min.js"></script>
+
+<!DOCTYPE html>
+{% extends 'data.html' %}
+
+{% load static %}
+{% block content %}
+
+
+<body>
+<form method="post" action="/ownerinsert/" data-parsley-validate="">
+  {% csrf_token %}
+    <center>
+  <section class="content">
+
+     <!-- Basic Forms -->
+      <div class="box box-default">
+        <div class="box-header with-border">
+         <center><h1 class="box-title">INSERT OWNER</h1></center>
+
+
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="row">
+            <div class="col-md-12">
+
+				<div class="form-group clearfix">
+				  <label for="example-text1-input" class="col-sm-2 col-form-label">FIRST NAME</label>
+				  <div class="col-sm-10">
+					<input class="form-control" type="text" id="example-text1-input" name="o_fname" data-parsley-required="true" data-parsley-required-message="First Name Cannot Be Null">
+				  </div>
+				</div>
+				<div class="form-group clearfix">
+				  <label for="example-email-input" class="col-sm-2 col-form-label">LAST NAME</label>
+				  <div class="col-sm-10">
+					<input class="form-control" type="text" id="example-email-input" name="o_lname" data-parsley-required="true" data-parsley-required-message="Last Name Cannot Be Null">
+				  </div>
+				</div>
+				<div class="form-group clearfix">
+				  <label for="example-url-input" class="col-sm-2 col-form-label">E-MAIL</label>
+				  <div class="col-sm-10">
+					<input class="form-control" type="email" id="example-url-input" name="o_email" data-parsley-required="true" data-parsley-pattern="/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/" data-parsley-error-message="Enter Correct email">
+				  </div>
+				</div>
+				<div class="form-group clearfix">
+				  <label for="example-tel-input" class="col-sm-2 col-form-label">PASSWORD</label>
+				  <div class="col-sm-10">
+					<input class="form-control" type="password" id="example-tel-input" name="o_pass" data-parsley-required="true" data-parsley-maxlength="10" data-parsley-minlength="3" data-parsley-error-message="Please Enter Password Between 3 to 10 characters">
+				  </div>
+				</div>
+				<div class="form-group clearfix">
+				  <label for="example-password-input" class="col-sm-2 col-form-label">ADDRESS</label>
+				  <div class="col-sm-10">
+					<input class="form-control" type="text" id="example-password-input" name="o_add" data-parsley-required="true" data-parsley-required-message="Address Cannot Be Null">
+				  </div>
+				</div>
+				<div class="form-group clearfix">
+				  <label for="example-number-input" class="col-sm-2 col-form-label">CONTACT</label>
+				  <div class="col-sm-10">
+					<input class="form-control" type="number" id="example-number-input" name="o_con" data-parsley-required="true" data-parsley-pattern="/^\d{10}$/" data-parsley-error-message="Enter Valid Contact Number">
+				  </div>
+				</div>
+
+				<div class="box-footer" align="center">
+                <input type="submit" class="btn btn-primary"></input>
+              </div>
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+
+
+      <!-- /.row -->
+
+    </section>
+        </center>
+</form>
+</body>
+
+{% endblock %}

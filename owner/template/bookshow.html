@@ -1,0 +1,99 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<style>
+	.td
+	{
+
+	}
+</style>
+
+<section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+
+
+          <!-- /.box -->
+
+          <div class="box">
+            <div class="box-header">
+              <h3>BOOKING TABLE</h3>
+              <h6 class="box-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+              <table id="example" class="table table-bordered table-hover display nowrap margin-top-10">
+				<thead>
+
+					<tr>
+						<th>ID</th>
+						<th>USER NAME</th>
+						<th>PG NAME</th>
+						<th>AMOUNT</th>
+						<th>CHECK-IN DATE</th>
+						<th>CHECK-OUT DATE</th>
+						<th>BOOKING DATE</th>
+						<th>BOOKING STATUS</th>
+						<th>PAY STATUS</th>
+
+
+					</tr>
+				</thead>
+
+				<tbody>
+					{% for i in data %}
+					<tr>
+
+						<td>{{i.b_id}}</td>
+						<td><a href="/owner/user/{{i.user_id}}" class="a">{{i.user_fname}} {{i.user_lname}}</a> </td>
+						<td>{{i.pg_name}}</td>
+						<td>{{i.b_amt}}</td>
+						<td>{{i.checkin_date}}</td>
+						<td>{{i.checkout_date}}</td>
+						<td>{{i.b_date}}</td>
+
+
+						{% if i.b_status == 1 %}
+						<td><span class="label label-success">Accepted</span></td>
+						{% elif i.b_status == 2 %}
+						<td><span class="label label-danger">Rejected</span></td>
+						{% else %}
+						<td><a href="/owner/accept/{{i.b_id}}" class="fa fa-check" aria-hidden="true"></a> &nbsp &nbsp &nbsp
+						<a href="/owner/reject/{{i.b_id}}"  class="fa fa-close" aria-hidden="true"></a></td>
+						{% endif %}
+
+
+						{% if i.pay_type == 0 and i.pay_status == 0 %}
+						<td><a href="/owner/acc_pay/{{i.b_id}}" class="fa fa-check" aria-hidden="true"></a> &nbsp &nbsp &nbsp
+						<a href="/owner/rej_pay/{{i.b_id}}"  class="fa fa-close" aria-hidden="true"></a></td>
+						{% elif i.pay_status == 1 and i.pay_type == 1 %}
+						<td><span class="label label-success">Razorpay</span></td>
+						{% elif i.pay_status == 1 and i.pay_type == 0 %}
+						<td><span class="label label-success">Recieved</span></td>
+						{% elif i.pay_status == 2 %}
+						<td><span class="label label-danger">Not Received</span></td>
+						{% endif %}
+
+
+
+
+					</tr>
+					{% endfor %}
+
+				</tbody>
+
+
+			</table>
+
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+{% endblock %}

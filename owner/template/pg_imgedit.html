@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+
+{% load static %}
+{% block content %}
+
+
+<body>
+<form method="POST" action="/owner/pgimgupd/{{pg_table.pg_id}}" enctype="multipart/form-data">
+  {% csrf_token %}
+    <center>
+  <section class="content">
+
+     <!-- Basic Forms -->
+      <div class="box box-default">
+        <div class="box-header with-border">
+         <center><h3 align="left"><b>EDIT PG IMAGE</b></h3></center>
+
+
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="row">
+            <div class="col-md-12">
+				<div class="form-group clearfix">
+				  <label  class="col-sm-2 col-form-label">IMAGE</label>
+				  <div class="col-sm-10">
+					<input class="form-control" type="file"  name="pg_img" required="false">
+				  </div>
+				</div>
+				<div class="box-footer" align="center">
+                <input type="submit" class="btn btn-primary"></input>
+              </div>
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+
+
+      <!-- /.row -->
+
+    </section>
+    <!-- /.content -->
+        </center>
+</form>
+</body>
+
+
+{% endblock %}
+

@@ -1,0 +1,301 @@
+
+{% extends 'header1.html' %}
+{% load static %}
+{% block content %}
+    <!-- HEADER AREA END -->
+
+
+    <!-- Utilize Mobile Menu End -->
+
+
+
+    <!-- SLIDER AREA START (slider-3) -->
+    <div class="ltn__slider-area ltn__slider-3  section-bg-2">
+        <div class="ltn__slide-one-active slick-slide-arrow-1 slick-slide-dots-1">
+            <!-- ltn__slide-item -->
+            <div class="ltn__slide-item ltn__slide-item-2 ltn__slide-item-3-normal--- ltn__slide-item-3 bg-image bg-overlay-theme-black-60" data-bs-bg="{% static 'img/slider/11.jpg' %}">
+                <div class="ltn__slide-item-inner text-center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 align-self-center">
+                                <div class="slide-item-info">
+                                    <div class="slide-item-info-inner ltn__slide-animation">
+                                        <div class="slide-video mb-50 d-none">
+                                            <a class="ltn__video-icon-2 ltn__video-icon-2-border" href="{% static 'https://www.youtube.com/embed/tlThdr3O5Qo' %}" data-rel="lightcase:myCollection">
+                                                <i class="fa fa-play"></i>
+                                            </a>
+                                        </div>
+                                        <h6 class="slide-sub-title white-color--- animated"><span><i class="fas fa-home"></i></span> PG-Finder</h6>
+                                        <h1 class="slide-title animated ">Find Your Home<br> Away From Home With Us</h1>
+                                        <div class="slide-brief animated">
+                                            <p>Multiple Student's Paradise available at a single place and also provide interaction with the PG's Owner</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ltn__slide-item -->
+
+            <!-- ltn__slide-item -->
+
+            <!--  -->
+        </div>
+    </div>
+    <!-- SLIDER AREA END -->
+
+    <!-- CAR DEALER FORM AREA START -->
+    <div class="ltn__car-dealer-form-area mt--65 mt-120 pb-115---">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ltn__car-dealer-form-tab">
+                        <div class="ltn__tab-menu  text-uppercase d-none">
+                            <div class="nav">
+                                <a class="active show" data-bs-toggle="tab" href="{% static '#ltn__form_tab_1_1' %}"><i class="fas fa-car"></i>Find A Car</a>
+                                <a data-bs-toggle="tab" href="{% static '#ltn__form_tab_1_2' %}" class=""><i class="far fa-user"></i>Get a Dealer</a>
+                            </div>
+                        </div>
+                        <div class="tab-content bg-white box-shadow-1 ltn__border position-relative pb-10">
+                            <div class="tab-pane fade active show" id="ltn__form_tab_1_1">
+                                <div class="car-dealer-form-inner">
+                                    <form action="/client/searchp/" class="ltn__car-dealer-form-box row" method="post" autocomplete="">
+                                            {% csrf_token %}
+                                        <div class="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-meter---- col-lg-9 col-md-6">
+                                            <input type="text" autocomplete="" placeholder="Search your Area..." onfocus="this.value=''" name="area_name" id="search1">
+                                        </div>
+
+                                        <div class="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-calendar col-lg-3 col-md-6">
+                                            <div class="btn-wrapper text-center mt-0">
+                                                <!-- <button type="submit" class="btn theme-btn-1 btn-effect-1 text-uppercase">Search Inventory</button> -->
+                                                <button type="submit" class="btn theme-btn-1 btn-effect-1 text-uppercase">Find Now</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                             <div class="tab-pane fade" id="ltn__form_tab_1_2">
+                                <div class="car-dealer-form-inner">
+                                    <form action="#" class="ltn__car-dealer-form-box row">
+                                        <div class="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-car---- col-lg-3 col-md-6">
+                                            <select class="nice-select">
+                                                <option>Choose Area</option>
+                                                <option>chicago</option>
+                                                <option>London</option>
+                                                <option>Los Angeles</option>
+                                                <option>New York</option>
+                                                <option>New Jersey</option>
+                                            </select>
+                                        </div> 
+                                        <div class="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-meter---- col-lg-3 col-md-6">
+                                            <select class="nice-select">
+                                                <option>Property Status</option>
+                                                <option>Open house</option>
+                                                <option>Rent</option>
+                                                <option>Sale</option>
+                                                <option>Sold</option>
+                                            </select>
+                                        </div> 
+                                        <div class="ltn__car-dealer-form-item ltn__custom-icon---- ltn__icon-calendar---- col-lg-3 col-md-6">
+                                            <select class="nice-select">
+                                                <option>Property Type</option>
+                                                <option>Apartment</option>
+                                                <option>Co-op</option>
+                                                <option>Condo</option>
+                                                <option>Single Family Home</option>
+                                            </select>
+                                        </div>
+                                        <div class="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-calendar col-lg-3 col-md-6">
+                                            <div class="btn-wrapper text-center mt-0">
+                                                <!-- <button type="submit" class="btn theme-btn-1 btn-effect-1 text-uppercase">Search Inventory</button> -->
+                                                <a href="{% static 'shop-right-sidebar.html' %}" class="btn theme-btn-1 btn-effect-1 text-uppercase">Search Properties</a>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- CAR DEALER FORM AREA END -->
+    <!-- FEATURE AREA START ( Feature - 6) -->
+
+    <!-- FEATURE AREA END -->
+
+    <!-- SEARCH BY PLACE AREA START (testimonial-7) -->
+    <div class="ltn__search-by-place-area section-bg-1 before-bg-top--- bg-image-top--- pt-115 pb-70" data-bs-bg="img/bg/20.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title-area ltn__section-title-2--- text-center">
+                        <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color">Area Properties</h6>
+                        <h1 class="section-title">Properties By Location</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ltn__search-by-place-slider-1-active slick-arrow-1">
+                 {% for i in data %}
+                <div class="col-lg-4">
+                    <div class="ltn__search-by-place-item">
+                        <div class="search-by-place-img">
+                            <a><img src="{% static 'img/product-3/1.jpg' %}" alt="#"></a>
+                            <div class="search-by-place-badge">
+                                <ul>
+                                    <li>{{i.total}} Properties</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="search-by-place-info">
+
+                            <h4>{{i.area_name}}</a></h4>
+                            <div class="search-by-place-btn">
+                                <a href="/client/loc/{{i.area_id}}">View Properties <i class="flaticon-right-arrow"></i></a>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                {% endfor %}
+
+                <!--  -->
+            </div>
+
+        </div>
+    </div>
+    <!-- SEARCH BY PLACE AREA END -->
+
+    <!-- PRODUCT SLIDER AREA START -->
+    <div class="ltn__product-slider-area ltn__product-gutter pt-115 pb-90">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title-area ltn__section-title-2--- text-center">
+                        <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color">Properties</h6>
+                        <h1 class="section-title">Featured Listings</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ltn__product-slider-item-three-active slick-arrow-1">
+                <!-- ltn__product-item -->
+                {% for i in form %}
+                            {% if i.is_featured == 1 %}
+                <div class="col-lg-12">
+
+                  <div class="ltn__product-item ltn__product-item-4 text-center---">
+
+                        <div class="product-img">
+                            <a href="/client/product-details/{{i.pg_id}}"><img src="{% static '/images/' %}{{i.pg_img}}" height="219px" width="550px" alt="#"></a>
+                            <div class="product-badge">
+                                <ul>
+                                    <li class="sale-badge bg-green">For Rent</li>
+                                     <li class="sale-badge bg-blue">{{i.c_id.c_name}}</li>
+                                </ul>
+                            </div>
+                            <div class="product-img-location-gallery">
+                                <div class="product-img-location">
+                                    <ul>
+                                        <li>
+                                            <a><i class="flaticon-pin"></i> {{i.area_id.area_name}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-price">
+                                <span>{{i.pg_price}}₹<label>/Month</label></span>
+                            </div>
+                            <h2 class="product-title"><a>{{i.pg_name}}</a></h2>
+                            <div class="product-description">
+                                <p>{{i.pg_desc}}</p>
+                            </div>
+
+                        </div>
+                        <div class="product-info-bottom">
+                            <div class="real-estate-agent">
+                                <div class="agent-img">
+                                    <a href="team-details.html"><img src="{% static 'img/user.png' %}" alt="#"></a>
+                                </div>
+                                <div class="agent-brief">
+                                    <h6><a href="team-details.html">{{i.o_id.o_fname}} {{i.o_id.o_lname}}</a></h6>
+                                    <small>Contact - {{i.o_id.o_con}}</small>
+                                </div>
+                            </div>
+
+                            <div class="product-hover-action">
+                                <ul>
+                                    <li>
+                                        {% if i.pg_id in likes %}
+                                                            <a href="/client/showwish/" title="Wishlist" >
+                                                                <i class="fa fa-heart" style="color:#FF5A3C"></i></a>
+                                        {% else %}
+
+                                                            <a href="/client/wishlist/{{i.pg_id}}" title="Wishlist" >
+                                                                <i class="flaticon-heart-1"></i></a>
+                                        {% endif %}
+                                    </li>
+                                    <li>
+                                        <a href="/client/product-details/{{i.pg_id}}" title="Product Details">
+                                            <i class="flaticon-add"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                     {% endif %}
+                         {% endfor %}
+                <!--  -->
+            </div>
+
+        </div>
+    </div>
+    <!-- PRODUCT SLIDER AREA END -->
+
+    <!-- VIDEO AREA START -->
+
+    <!-- VIDEO AREA END -->
+
+    <!-- TESTIMONIAL AREA START -->
+
+    <!-- TESTIMONIAL AREA END -->
+
+    <!-- BRAND LOGO AREA START -->
+
+    <!-- BRAND LOGO AREA END -->
+
+    <!-- BLOG AREA START (blog-3) -->
+
+    <!-- BLOG AREA END -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+  $( function() {
+    $( "#search1" ).autocomplete({
+     alert('Hello');
+      source: '{% url 'pro_search'  %}'
+
+    });
+  });
+
+
+</script>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+<section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+
+
+          <!-- /.box -->
+
+          <div class="box">
+            <div class="box-header">
+				<h3>PG TABLE</h3>
+
+
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+					<!--<h4><center>TO INSERT CLICK<br><u><b><a href="/owner/pg_insert/" class="a">Insert Data</a></b></u></center></h4> -->
+				<h6 class="box-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
+              <table id="example" class="table table-bordered table-hover display nowrap margin-top-10">
+				<thead>
+
+					<tr>
+						<th>ID</th>
+						<th>PG NAME</th>
+						<th>EMAIL</th>
+						<th>CONTACT</th>
+						<th>ADDRESS</th>
+						<th>IMAGE</th>
+						<th>AVAILABILITY</th>
+						<th>PRICE</th>
+                        <th>CAT NAME</th>
+						<th>AREA NAME</th>
+                        <th>OWNER NAME</th>
+						<th><span class="fa fa-trash"></span></th>
+						<th><span class="fa fa-edit"></span></th>
+						<th>FAC</th>
+						<th>FEEDBACK</th>
+
+
+					</tr>
+				</thead>
+				<tbody>
+					{% for i in pg_details %}
+					<tr>
+
+						<td>{{i.pg_id}}</td>
+						<td>{{i.pg_name}}</td>
+						<td>{{i.pg_email}}</td>
+						<td>{{i.pg_con}}</td>
+						<td>{{i.pg_add}}</td>
+						<td><img src="{% static 'images/' %}{{i.pg_img}}" height="50" width="50"><a href ="/owner/pgimgedit/{{i.pg_id}}" class="fa fa-edit"></a></td>
+						{% if i.pg_avail == 0 %}
+						<td><a href="/owner/acc_avail/{{i.pg_id}}" class="fa fa-check" aria-hidden="true"></a> &nbsp &nbsp &nbsp
+						<a href="/owner/rej_avail/{{i.pg_id}}"  class="fa fa-close" aria-hidden="true"></a></td>
+						{% elif i.pg_avail == 1 %}
+
+						<td><span class="label label-success">Available</span>&nbsp &nbsp &nbsp &nbsp
+						<a href="/owner/rej_avail/{{i.pg_id}}"  class="fa fa-close" aria-hidden="true"></a></td>
+						{% else %}
+						<td><span class="label label-danger">Unavailable</span>&nbsp &nbsp &nbsp<a href="/owner/acc_avail/{{i.pg_id}}" class="fa fa-check" aria-hidden="true"></a> &nbsp
+						</td>
+						{% endif %}
+						<td>{{i.pg_price}}</td>
+                        <td>{{i.c_id.c_name}}</td>
+						<td>{{i.area_id.area_name}}</td>
+                        <td>{{i.o_id.o_fname}} {{i.o_id.o_lname}}</td>
+						<td><a href="/owner/pg_delete/{{i.pg_id}}"><span class="fa fa-trash"></span></a></td>
+						<td><a href="/owner/pg_update/{{i.pg_id}}"><span class="fa fa-edit"></span></a></td>
+						<td><a href="/owner/add/{{i.pg_id}}"><span class="fa fa-plus-circle"></span></a></td>
+						<td><a href="/owner/feedback/{{i.pg_id}}">Show</a></td>
+
+					</tr>
+
+					{% endfor %}
+
+				</tbody>
+
+
+			</table>
+
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+{% endblock %}

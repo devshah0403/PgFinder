@@ -1,0 +1,50 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- Main content -->
+    <section class="content">
+
+      <div class="row">
+        <div class="col-md-4">
+
+          <!-- Profile Image -->
+          <div class="box box-primary">
+            <div class="box-body box-profile">
+              <img class="profile-user-img img-responsive img-circle" src="{% static 'images/5.jpg' %}" alt="User profile picture">
+
+              <h3 class="profile-username text-center">{{form.o_fname}} {{form.o_lname}}</h3>
+              <div class="row social-states">
+				  <div class="col-xs-6 text-right"><a href="#" class="link"><i class="ion ion-ios-people-outline"></i> 254</a></div>
+				  <div class="col-xs-6 text-left"><a href="#" class="link"><i class="ion ion-images"></i> 54</a></div>
+			  </div>
+            
+              <div class="row">
+              	<div class="col-xs-12">
+              		<div class="profile-user-info">
+						<p>E-mail address </p>
+						<h5>{{form.o_email}}</h5>
+						<p>Phone</p>
+						<h5>{{form.o_con}}</h5>
+						<p>Address</p>
+						<h5>{{form.o_add}}</h5>
+
+					</div>
+             	</div>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+ {% endblock %}

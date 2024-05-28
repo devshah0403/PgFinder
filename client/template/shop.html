@@ -1,0 +1,457 @@
+<!doctype html>
+{% extends 'header1.html' %}
+{% load static %}
+{% block content %}
+    <style>
+details > summary {
+  color:var(--ltn__paragraph-color);;
+  padding: 4px;
+  width: auto;
+  font-family: var(--ltn__heading-font);
+  font-weight:600;
+  background-color: white;
+  border: none;
+  box-shadow: 1px 1px 2px #bbbbbb;
+  cursor: pointer;
+}
+
+details > p {
+  background-color: white;
+  padding: 4px;
+  margin: 0;
+  box-shadow: 1px 1px 2px #bbbbbb;
+}
+</style>
+
+    <!-- PRODUCT DETAILS AREA START -->
+    <div class="ltn__product-area ltn__product-gutter mb-120">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="ltn__shop-options">
+                        <ul class="justify-content-start">
+
+                            <li class="d-none">
+                               <div class="showing-product-number text-right">
+                                    <span>Showing 1–12 of 18 results</span>
+                                </div> 
+                            </li>
+                            <li>
+                                <form id="sortform" method="POST" data-sort-url="{% url 'ajax_sort_products' %}" action="">
+                               <div class="short-by text-center">
+                                    <select class="nice-select" id="orderby" id="short">
+                                        <option value="0">Default Sorting</option>
+                                        <!--<option>Sort by popularity</option>
+                                        <option>Sort by new arrivals</option> -->
+                                        <option value="1">Sort by price: low to high</option>
+                                        <option value="2">Sort by price: high to low</option>
+                                    </select>
+                                </div>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+                    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+                        <script>
+                        $(document).ready(function() {
+
+                            $("#orderby").change(function () {
+                                var url = $("#sortform").attr("data-sort-url");
+                                var SId = $(this).val();
+                                $.ajax({
+                                    url: url,
+                                    data: {
+                                        'sort': SId,
+                                    },
+                            success: function (data) {
+                                $("#product").html(data);  // replace the contents of the city input with the data that came from the server
+                            }
+                            });
+
+                            });
+                        });
+                       </script>
+
+
+                            <script>
+                        $(document).ready(function() {
+                            $("#filter").click(function () {
+                                        alert("test");
+
+                                var url = $("#filterform").attr("data-filter-url");
+                                var SId = $(amount).val();
+                                var d = SId.split("-");
+                                var s = d[0].split("₹");
+                                var e = d[1].split("₹");
+                                {alert(e[1]);}
+                                $.ajax({
+                                    url: url,
+                                    data: {
+                                        'start': s[1],
+                                        'end': e[1],
+                                    },
+                            success: function (data) {
+                                $("#product").html(data);  // replace the contents of the city input with the data that came from the server
+                                {alert(data);}
+                            }
+                            });
+                            });
+                        });
+                       </script>
+
+
+                    <div class="tab-content" id="product">
+                        <div class="tab-pane fade active show" id="liton_product_grid">
+                            <div class="ltn__product-tab-content-inner ltn__product-grid-view">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <!-- Search Widget -->
+                                        <div class="ltn__search-widget mb-30">
+                                            <form action="/client/searchp/" method="post">
+                                                {% csrf_token %}
+                                                <input type="text" name="area_name" placeholder="Search your Area...">
+                                                <button type="submit"><i class="fas fa-search"></i></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- ltn__product-item -->
+
+                                    <!-- ltn__product-item -->
+
+                                    {% for data in pg_details %}
+                                    {% if data.pg_avail == 1 %}
+                                    <div class="col-xl-6 col-sm-6 col-12">
+                                        <div class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
+                                            <div class="product-img">
+
+                                                <a href="/client/product-details/{{data.pg_id}}"><img src="{% static '/images/' %}{{data.pg_img}}"  height="219px" width="550px"></a>
+
+                                                <div class="real-estate-agent">
+
+                                                </div>
+                                            </div>
+                                            <div class="product-info">
+                                                <div class="product-badge">
+                                                    <ul>
+                                                        <li class="sale-badg">For Rent</li> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                                                        <li><button class="bg-blue">{{data.c_id.c_name}}</button></li>
+                                                    </ul>
+                                                </div>
+                                                <h2 class="product-title"><a href="/client/product-details/{{data.pg_id}}">{{data.pg_name}}</a></h2>
+                                                <h3 class="product-title"><small>Contact : {{data.pg_con}}</small></h3>
+                                                 <label>E-mail : {{data.pg_email}}</label>
+                                                <div class="product-img-location">
+                                                    <ul>
+                                                        <li>
+                                                            <a><i class="flaticon-pin">{{data.area_id.area_name}}</i> </a>
+                                                        </li>
+                                                    </ul>
+                                                    <br/>
+                                                </div>
+
+                                                <div class="product-hover-action" align="right">
+                                                    <ul>
+                                                         {% if data.pg_id in likes %}
+                                                        <li>
+                                                            <a href="/client/showwish/" title="Wishlist" >
+                                                                <i class="fa fa-heart" style="color:#FF5A3C"></i></a>
+                                                        </li>
+                                                        {% else %}
+                                                        <li>
+                                                            <a href="/client/wishlist/{{data.pg_id}}" title="Wishlist" >
+                                                                <i class="flaticon-heart-1"></i></a>
+                                                        </li>
+                                                        {% endif %}
+                                                        <li>
+                                                            <a href="/client/product-details/{{data.pg_id}}" title="Product Details">
+                                                                <i class="flaticon-add"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="product-info-bottom">
+                                                <div class="product-price">
+                                                    <span>{{data.pg_price}}₹<label>/Month</label></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+
+
+                                    <!--  -->
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-lg-4">
+                    <aside class="sidebar ltn__shop-sidebar ltn__right-sidebar">
+                        <h3 class="mb-10">Advance Information</h3>
+                        <label class="mb-30"><small></small></label>
+                        <!-- Advance Information widget -->
+                        <div class="widget ltn__menu-widget">
+                            <details>
+                            <summary>Available Facility</summary>
+                             <form method="post" action="/client/filter/">
+                            {% csrf_token %}
+                            <ul>
+                                {% for i in fac %}
+                                <li>
+                                        <label class="checkbox-item">{{i.f_name}}
+                                            <input type="checkbox" name="check[]" value="{{i.f_id}}">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                </li>
+                                {% endfor %}
+                                <br>
+                               <div class="btn-wrapper mt-0" align="center">
+                                   <button class="btn theme-btn-1 btn-effect-1 text-uppercase" type="submit">Submit</button>
+                               </div>
+                            </ul>
+                             </form>
+                            </details>
+                            <details>
+                            <summary>Available Category</summary>
+                             <form method="post" action="/client/filter_cat/">
+                            {% csrf_token %}
+                            <ul>
+                                <li>
+                                        <label class="checkbox-item">BOYS
+                                            <input type="checkbox" name="id" value="4">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                </li>
+                                <li>
+                                        <label class="checkbox-item">Girls
+                                            <input type="checkbox" name="id" value="5">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                </li>
+                                <li>
+                                        <label class="checkbox-item">Both
+                                            <input type="checkbox" name="id" value="9">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                </li>
+
+                                <br>
+                               <div class="btn-wrapper mt-0" align="center">
+                                   <button class="btn theme-btn-1 btn-effect-1 text-uppercase" type="submit">Submit</button>
+                               </div>
+                            </ul>
+                             </form>
+                            </details>
+
+                            <details>
+                                <summary>Filter by price</summary>
+                                <br>
+                                 <form  id="filterform" data-filter-url="{% url 'ajax_filter_products' %}">
+                                    {% csrf_token %}
+                                     <div class="price_filter">
+                                    <div class="price_slider_amount">
+                                        <input type="submit"  value="Your range:" />
+                                        <input type="text" class="amount" name="price[]" id="amount" placeholder="Add Your Price" />
+                                    </div>
+                                    <div class="slider-range" id="filter"></div>
+                                         <br>
+                                     </div>
+
+                                </form>
+                                </details>
+
+                            <!-- Price Filter Widget -->
+
+
+                        </div>
+
+                        <div class="widget ltn__menu-widget d-none">
+                            <h4 class="ltn__widget-title ltn__widget-title-border">Product categories</h4>
+                            <ul>
+                                <li><a href="#">Body <span><i class="fas fa-long-arrow-alt-right"></i></span></a></li>
+                                <li><a href="#">Interior <span><i class="fas fa-long-arrow-alt-right"></i></span></a></li>
+                                <li><a href="#">Lights <span><i class="fas fa-long-arrow-alt-right"></i></span></a></li>
+                                <li><a href="#">Parts <span><i class="fas fa-long-arrow-alt-right"></i></span></a></li>
+                                <li><a href="#">Tires <span><i class="fas fa-long-arrow-alt-right"></i></span></a></li>
+                                <li><a href="#">Uncategorized <span><i class="fas fa-long-arrow-alt-right"></i></span></a></li>
+                                <li><a href="#">Wheel <span><i class="fas fa-long-arrow-alt-right"></i></span></a></li>
+                            </ul>
+                        </div>
+                        <!-- Price Filter Widget -->
+                        <div class="widget ltn__price-filter-widget d-none">
+
+                            Filter by price
+                            <div class="price_filter">
+                                <div class="price_slider_amount">
+                                    <input type="submit"  value="Your range:"/> 
+                                    <input type="text" class="amount" name="price"  placeholder="Add Your Price" /> 
+                                </div>
+                                <div class="slider-range"></div>
+                            </div>
+                        </div>
+                        <!-- Top Rated Product Widget -->
+                        <div class="widget ltn__top-rated-product-widget d-none">
+                            <h4 class="ltn__widget-title ltn__widget-title-border">Top Rated Product</h4>
+                            <ul>
+                                <li>
+                                    <div class="top-rated-product-item clearfix">
+                                        <div class="top-rated-product-img">
+                                            <a href="product-details.html"><img src="{% static  'img/product/1.png' %}" alt="#"></a>
+                                        </div>
+                                        <div class="top-rated-product-info">
+                                            <div class="product-ratting">
+                                                <ul>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <h6><a href="product-details.html">Mixel Solid Seat Cover</a></h6>
+                                            <div class="product-price">
+                                                <span>$49.00</span>
+                                                <del>$65.00</del>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="top-rated-product-item clearfix">
+                                        <div class="top-rated-product-img">
+                                            <a href="product-details.html"><img src="{% static  'img/product/2.png' %}" alt="#"></a>
+                                        </div>
+                                        <div class="top-rated-product-info">
+                                            <div class="product-ratting">
+                                                <ul>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <h6><a href="product-details.html">3 Rooms Manhattan</a></h6>
+                                            <div class="product-price">
+                                                <span>$49.00</span>
+                                                <del>$65.00</del>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="top-rated-product-item clearfix">
+                                        <div class="top-rated-product-img">
+                                            <a href="product-details.html"><img src="{% static  'img/product/3.png' %}" alt="#"></a>
+                                        </div>
+                                        <div class="top-rated-product-info">
+                                            <div class="product-ratting">
+                                                <ul>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                                    <li><a href="#"><i class="far fa-star"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <h6><a href="product-details.html">Coil Spring Conversion</a></h6>
+                                            <div class="product-price">
+                                                <span>$49.00</span>
+                                                <del>$65.00</del>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Search Widget -->
+                        <div class="widget ltn__search-widget d-none">
+                            <h4 class="ltn__widget-title ltn__widget-title-border">Search Objects</h4>
+                            <form action="/client/searchp/" method="post">
+                                {% csrf_token %}
+                                <input type="text" name="area_name" placeholder="Search your keyword...">
+                                <button type="submit">Search</button>
+                            </form>
+                        </div>
+                        <!-- Tagcloud Widget -->
+                        <div class="widget ltn__tagcloud-widget d-none">
+                            <h4 class="ltn__widget-title ltn__widget-title-border">Popular Tags</h4>
+                            <ul>
+                                <li><a href="#">Popular</a></li>
+                                <li><a href="#">desgin</a></li>
+                                <li><a href="#">ux</a></li>
+                                <li><a href="#">usability</a></li>
+                                <li><a href="#">develop</a></li>
+                                <li><a href="#">icon</a></li>
+                                <li><a href="#">Car</a></li>
+                                <li><a href="#">Service</a></li>
+                                <li><a href="#">Repairs</a></li>
+                                <li><a href="#">Auto Parts</a></li>
+                                <li><a href="#">Oil</a></li>
+                                <li><a href="#">Dealer</a></li>
+                                <li><a href="#">Oil Change</a></li>
+                                <li><a href="#">Body Color</a></li>
+                            </ul>
+                        </div>
+                        <!-- Size Widget -->
+                        <div class="widget ltn__tagcloud-widget ltn__size-widget d-none">
+                            <h4 class="ltn__widget-title ltn__widget-title-border">Product Size</h4>
+                            <ul>
+                                <li><a href="#">S</a></li>
+                                <li><a href="#">M</a></li>
+                                <li><a href="#">L</a></li>
+                                <li><a href="#">XL</a></li>
+                                <li><a href="#">XXL</a></li>
+                            </ul>
+                        </div>
+                        <!-- Color Widget -->
+                        <div class="widget ltn__color-widget d-none">
+                            <h4 class="ltn__widget-title ltn__widget-title-border">Product Color</h4>
+                            <ul>
+                                <li class="black"><a href="#"></a></li>
+                                <li class="white"><a href="#"></a></li>
+                                <li class="red"><a href="#"></a></li>
+                                <li class="silver"><a href="#"></a></li>
+                                <li class="gray"><a href="#"></a></li>
+                                <li class="maroon"><a href="#"></a></li>
+                                <li class="yellow"><a href="#"></a></li>
+                                <li class="olive"><a href="#"></a></li>
+                                <li class="lime"><a href="#"></a></li>
+                                <li class="green"><a href="#"></a></li>
+                                <li class="aqua"><a href="#"></a></li>
+                                <li class="teal"><a href="#"></a></li>
+                                <li class="blue"><a href="#"></a></li>
+                                <li class="navy"><a href="#"></a></li>
+                                <li class="fuchsia"><a href="#"></a></li>
+                                <li class="purple"><a href="#"></a></li>
+                                <li class="pink"><a href="#"></a></li>
+                                <li class="nude"><a href="#"></a></li>
+                                <li class="orange"><a href="#"></a></li>
+
+                                <li><a href="#" class="orange"></a></li>
+                                <li><a href="#" class="orange"></a></li>
+                            </ul>
+                        </div>
+                        <!-- Banner Widget -->
+                        <div class="widget ltn__banner-widget d-none">
+                            <a href="shop.html"><img src="{% static  'img/banner/banner-2.jpg' %}" alt="#"></a>
+                        </div>
+
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- PRODUCT DETAILS AREA END -->
+
+{% endblock %}
+
+
+

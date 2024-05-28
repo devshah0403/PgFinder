@@ -1,0 +1,116 @@
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.7.0/parsley.min.js"></script>
+
+<!DOCTYPE html>
+{% extends 'index.html' %}
+
+{% load static %}
+{% block content %}
+
+
+<body>
+<form method="POST" action="/owner/pg_update/{{pg_table.pg_id}}" data-parsley-validate="">
+  {% csrf_token %}
+    <center>
+  <section class="content">
+
+     <!-- Basic Forms -->
+      <div class="box box-default">
+        <div class="box-header with-border">
+         <center><h3 align="left"><b>EDIT PG</b></h3></center>
+
+
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="row">
+            <div class="col-md-12">
+				<div class="form-group clearfix">
+				  <label for="example-text1-input" class="col-sm-2 col-form-label">NAME</label>
+				  <div class="col-sm-10">
+					<input class="form-control" type="text" id="example-text2-input" name="pg_name" value="{{pg_table.pg_name}}" data-parsley-required="true" data-parsley-required-message="PG Name Cannot Be Null">
+				  </div>
+				</div>
+				<div class="form-group clearfix">
+				  <label for="example-text1-input" class="col-sm-2 col-form-label">E-MAIL</label>
+				  <div class="col-sm-10">
+					<input class="form-control" type="email" id="example-text1-input" name="pg_email" required="false" value="{{pg_table.pg_email}}" data-parsley-required="true" data-parsley-pattern="/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/" data-parsley-error-message="Enter Correct email">
+				  </div>
+				</div>
+				<div class="form-group clearfix">
+				  <label for="example-email-input" class="col-sm-2 col-form-label">CONTACT</label>
+				  <div class="col-sm-10">
+					<input class="form-control" type="number" id="example-email-input" name="pg_con" required="false" value="{{pg_table.pg_con}}" data-parsley-required="true" data-parsley-pattern="/^\d{10}$/" data-parsley-error-message="Please Enter Valid Contact Number">
+				  </div>
+				</div>
+				<div class="form-group clearfix">
+				  <label for="example-url-input" class="col-sm-2 col-form-label">ADDRESS</label>
+				  <div class="col-sm-10">
+					<input class="form-control" type="text" id="example-url-input" name="pg_add" required="false" value="{{pg_table.pg_add}}" data-parsley-required="true" data-parsley-required-message="Address Cannot Be Null">
+				  </div>
+				</div>
+				<div class="form-group clearfix">
+				  <label for="example-password-input" class="col-sm-2 col-form-label">AVAILABILITY</label>
+				  <div class="col-sm-10">
+					<input class="form-control" type="text" id="example-password-input" name="pg_avail" required="false" value="{{pg_table.pg_avail}}">
+				  </div>
+				</div>
+				<div class="form-group clearfix">
+				  <label for="example-number-input" class="col-sm-2 col-form-label">PRICE</label>
+				  <div class="col-sm-10">
+					<input class="form-control" type="number" id="example-number-input" name="pg_price" required="false" value="{{pg_table.pg_price}}" data-parsley-required="true" data-parsley-required-message="Please Enter Price ">
+				  </div>
+				</div>
+				<div class="form-group clearfix">
+				  <label  class="col-sm-2 col-form-label">CAT ID</label>
+				  <div class="col-sm-10">
+					<!--<input class="form-control" type="number" id="example-datetime-local-input" name="c_id" required="false" value="{{pg_table.c_id}}"> -->
+					<select class="form-control"  name="c_id">
+						<option disabled="true" selected="">Select Category</option>
+					  {% for i in cat_table %}
+						<option value="{{i.c_id}}">{{i.c_id}} &nbsp {{i.c_name}}</option>
+					  {% endfor %}
+
+					</select>
+				  </div>
+
+				</div>
+				<div class="form-group clearfix">
+				  <label  class="col-sm-2 col-form-label">AREA ID</label>
+				  <div class="col-sm-10">
+					<!--<input class="form-control" type="number" id="example-datetime-local-input" name="c_id" required="false" value="{{pg_table.c_id}}"> -->
+					<select class="form-control" name="area_id">
+						<option disabled="true" selected="">Select Area</option>
+					  {% for i in area %}
+						<option value="{{i.area_id}}">{{i.area_id}} &nbsp {{i.area_name}}</option>
+					  {% endfor %}
+
+					</select>
+				  </div>
+
+				</div>
+
+				<div class="box-footer" align="center">
+                <input type="submit" class="btn btn-primary"></input>
+              </div>
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+
+
+      <!-- /.row -->
+
+    </section>
+    <!-- /.content -->
+        </center>
+</form>
+</body>
+
+
+{% endblock %}
+

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+
+{% load static %}
+{% block content %}
+
+
+<body>
+<form method="POST" action="/owner/ins_pgfac/{{pg.pg_id}}" data-parsley-validate="">
+  {% csrf_token %}
+    <center>
+  <section class="content">
+
+     <!-- Basic Forms -->
+      <div class="box box-default">
+        <div class="box-header with-border">
+         <center><h3 align="left"><b>ADD PG-FACILITY</b></h3></center>
+
+
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="row">
+            <div class="col-md-12">
+
+				<div class="form-group clearfix">
+				  <label class="col-sm-2 col-form-label">AVAILABLE FACILITY : </label>
+               <div class="form-group">
+
+                  <div class="checkbox" align="left">
+                      {% for data in fac %}
+                      {% if data.f_id  not in pgfac %}
+                      <input type="checkbox" id="{{data.f_id}}" name="fac[]" value="{{data.f_id}}">
+					  <label for="{{data.f_id}}">{{data.f_name}}</label>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+
+                </div>
+				</div>
+
+
+				<div class="box-footer" align="center">
+                <input type="submit" class="btn btn-primary"></input>
+              </div>
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+
+
+      <!-- /.row -->
+
+    </section>
+    <!-- /.content -->
+        </center>
+</form>
+</body>
+
+
+{% endblock %}
+

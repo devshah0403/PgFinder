@@ -1,0 +1,70 @@
+{% extends 'data.html' %}
+{% load static %}
+{% block content %}
+<style>
+
+</style>
+
+<section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+
+
+          <!-- /.box -->
+
+          <div class="box">
+            <div class="box-header">
+              <h3>OWNER TABLE</h3>
+              <h6 class="box-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="example" class="table table-bordered table-hover display nowrap margin-top-10">
+				<thead>
+				<tr>
+					<th><tr><h4><center>TO INSERT CLICK<br><u><b><a href="/ownerinsert/" class="a">Insert Data</a></b></u></center></h4></tr></th>
+				</tr>
+					<tr>
+						<th>ID</th>
+						<th>FIRST NAME</th>
+						<th>LAST NAME</th>
+						<th>EMAIL</th>
+						<th>PASSWORD</th>
+						<th>ADDRESS</th>
+						<th>CONTACT</th>
+						<th><span class="fa fa-trash"></span></th>
+						<th><span class="fa fa-edit"></span></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for i in owner_table %}
+					<tr>
+
+						<td>{{i.o_id}}</td>
+						<td>{{i.o_fname}}</td>
+						<td>{{i.o_lname}}</td>
+						<td>{{i.o_email}}</td>
+						<td>{{i.o_pass}}</td>
+						<td>{{i.o_add}}</td>
+						<td>{{i.o_con}}</td>
+						<td><a href="/ownerdelete/{{i.o_id}}"><span class="fa fa-trash"></span></a></td>
+						<td><a href="/ownerupdate/{{i.o_id}}"><span class="fa fa-edit"></span></a></td>
+					</tr>
+					{% endfor %}
+
+				</tbody>
+
+
+			</table>
+
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+{% endblock %}
